@@ -1,0 +1,50 @@
+<h2>Step 3: Summary</h2>
+
+@if (modelSelection && configsSelection) {
+    <h3>Your Tesla {{modelSelection.model.description}}</h3>
+
+    <div class="flex-between">
+        <div>
+            <h5>{{configsSelection.config.description}}</h5>
+
+            <span class="range">Range: {{configsSelection.config.range}} miles</span> —
+            <span>Max speed: {{configsSelection.config.speed}}</span>
+        </div>
+
+        <span>{{configsSelection.config.price | currency:'USD'}}</span>
+    </div>
+
+    @if (selectedColor && selectedColor.price) {
+        <div class="flex-between">
+            <h5>{{selectedColor.description}}</h5>
+        
+            <span>{{selectedColor.price | currency:'USD'}}</span>
+        </div>
+    }
+
+    @if (configsSelection.towHitch) {
+        <div class="flex-between">
+            <h5>Tow Hitch Package</h5>
+        
+            <span>{{additionalPackagePrice | currency:'USD'}}</span>
+        </div>
+    }
+
+    @if (configsSelection.yoke) {
+        <div class="flex-between">
+            <h5>Yoke Steering Wheel Package</h5>
+        
+            <span>{{additionalPackagePrice | currency:'USD'}}</span>
+        </div>
+    }
+
+    <hr>
+
+    <div class="flex-between">
+        <h5>{{'Total cost' | uppercase}}</h5>
+    
+        <span>{{getTotalPrice() | currency:'USD'}}</span>
+    </div>
+
+    <hr>
+}

@@ -1,0 +1,27 @@
+<h2>Step 1: Choose your Model and color</h2>
+
+<div class="flex">
+  <div>
+    <label for="modelSelect">Model:</label>
+
+    <select name="modelSelect" id="modelSelect" [(ngModel)]="modelCode" (ngModelChange)="modelSelected()">
+      <option [ngValue]="null" disabled>Choose...</option>
+
+      @for (item of modelsObserver | async; track item.code) {
+        <option [ngValue]="item.code">{{item.description}}</option>
+      }
+    </select>
+  </div>
+
+  @if (modelCode) {
+    <div>
+      <label for="colorSelect">Color:</label>
+
+      <select name="colorSelect" id="colorSelect" [(ngModel)]="colorCode" (ngModelChange)="saveSelection()">
+        @for (item of selectedModel?.colors; track item.code) {
+          <option [ngValue]="item.code">{{item.description}}</option>
+        }
+      </select>
+    </div>
+  }
+</div>
